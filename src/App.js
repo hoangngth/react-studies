@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { changeIncrement, saveAction } from "./actions";
 
 function App() {
+  const changeCount = useSelector((state) => state.changeCount);
+  const lastAction = useSelector((state) => state.lastAction);
+  const dispatch = useDispatch();
+
+  const clickButton1 = () => {
+    dispatch(changeIncrement());
+    dispatch(saveAction("button 1 clicked"));
+  };
+
+  const clickButton2 = () => {
+    dispatch(changeIncrement());
+    dispatch(saveAction("button 2 clicked"));
+  };
+
+  console.log(changeCount);
+  console.log(lastAction);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Number of changes: {changeCount}</h1>
+      <h1>Last Action: {lastAction}</h1>
+      <button onClick={clickButton1}>Button 1</button>
+      <button onClick={clickButton2}>Button 2</button>
     </div>
   );
 }

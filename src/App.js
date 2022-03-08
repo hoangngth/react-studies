@@ -1,6 +1,7 @@
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import { changeIncrement, saveAction } from "./actions";
+import TaskTracker from "./components/TaskTracker";
 
 function App() {
   const changeCount = useSelector((state) => state.changeCount);
@@ -26,6 +27,7 @@ function App() {
       <h1>Last Action: {lastAction}</h1>
       <button onClick={clickButton1}>Button 1</button>
       <button onClick={clickButton2}>Button 2</button>
+      <TaskTracker />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,11 +7,11 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-.container {
-  max-width: 500px;
+.task-tracker-container {
+  max-width: 600px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
@@ -66,6 +66,12 @@ body {
 }
 
 .task h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task p {
   display: flex;
   align-items: center;
   justify-content: space-between;

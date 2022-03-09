@@ -17,6 +17,7 @@ const AddDialog = (props) => {
 
   const handleAddTask = () => {
     props.onAdd({ text, date, reminder });
+    props.onClose();
   };
 
   return (

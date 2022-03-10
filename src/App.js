@@ -2,7 +2,6 @@ import "./App.css";
 import { useSelector } from "react-redux";
 import TaskTracker from "./components/TaskTracker";
 import About from "./components/About";
-import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {

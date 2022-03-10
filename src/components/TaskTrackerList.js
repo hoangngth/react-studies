@@ -1,29 +1,53 @@
 import React from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaPen } from "react-icons/fa";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
-const TaskTrackerList = ({ tasks, onDelete, onToggle }) => {
+const TaskTrackerList = ({ tasks, onOpenEditDialog, onDelete, onToggle }) => {
   return (
     <>
-      {tasks.length > 0 ? (
-        tasks.map((task) => (
-          <div
-            className={`task ${task.reminder ? "reminder" : ""}`}
-            key={task.id}
-            onDoubleClick={() => onToggle(task.id)}
+      <Droppable droppableId="tasks">
+        {(provided) => (
+          <ul
+            className="tasks"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
           >
-            <h3>
-              {task.text}
-              <FaTimes
-                style={{ color: "red", cursor: "pointer" }}
-                onClick={() => onDelete(task.id)}
-              />
-            </h3>
-            <p>{task.date}</p>
-          </div>
-        ))
-      ) : (
-        <h3>No ongoing task, please add more!</h3>
-      )}
+            {tasks.length > 0 ? (
+              tasks.map((task, index) => (
+                <Draggable key={task.id} draggableId={task.id} index={index}>
+                  {(provided) => (
+                    <li
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      className={`task ${task.reminder ? "reminder" : ""}`}
+                      onDoubleClick={() => onToggle(task.id)}
+                    >
+                      <h3>
+                        {task.text}
+                        <div>
+                          <FaPen
+                            style={{ color: "grey", cursor: "pointer" }}
+                            onClick={() => onOpenEditDialog(task)}
+                          />
+                          <FaTimes
+                            style={{ color: "red", cursor: "pointer" }}
+                            onClick={() => onDelete(task.id)}
+                          />
+                        </div>
+                      </h3>
+                      <p>Created date: {task.date}</p>
+                    </li>
+                  )}
+                </Draggable>
+              ))
+            ) : (
+              <h3>No ongoing task, please add more!</h3>
+            )}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
     </>
   );
 };

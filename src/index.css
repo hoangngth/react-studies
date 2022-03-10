@@ -11,7 +11,7 @@ body {
 }
 
 .task-tracker-container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
@@ -52,6 +52,10 @@ body {
 .btn-block {
   display: block;
   width: 100%;
+}
+
+.tasks {
+  list-style-type: none;
 }
 
 .task {

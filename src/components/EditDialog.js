@@ -10,20 +10,22 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 
-const AddDialog = (props) => {
+const EditDialog = (props) => {
   const [text, setText] = useState("");
-  const [date, setDate] = useState(new Date().toISOString());
-  const [reminder, setReminder] = useState(true);
+  //   const [date, setDate] = useState(new Date().toISOString());
+  //   const [reminder, setReminder] = useState(true);
 
-  const handleAddTask = () => {
-    props.onAdd({ text, date, reminder });
+  const handleEditTask = () => {
+    const id = props.selectedTask.id;
+    if (text === "") setText(props.selectedTask.text);
+    props.onEdit({ id, text });
     props.onClose();
   };
 
   return (
     <>
       <Dialog open={props.open} onClose={props.onClose}>
-        <DialogTitle>Add Task</DialogTitle>
+        <DialogTitle>Edit Task</DialogTitle>
         <DialogContent>
           <DialogContentText>Input Task Information</DialogContentText>
           <TextField
@@ -34,26 +36,17 @@ const AddDialog = (props) => {
             type="text"
             fullWidth
             variant="standard"
+            defaultValue={props.selectedTask.text}
             onChange={(e) => setText(e.target.value)}
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={reminder}
-                onChange={(e) => setReminder(!reminder)}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-            }
-            label="Reminder"
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={props.onClose}>Cancel</Button>
-          <Button onClick={handleAddTask}>Add</Button>
+          <Button onClick={handleEditTask}>Confirm</Button>
         </DialogActions>
       </Dialog>
     </>
   );
 };
 
-export default AddDialog;
+export default EditDialog;
